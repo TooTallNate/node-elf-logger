@@ -1,17 +1,23 @@
 node-elf-logger
 ===============
 
-This library is a simple, configurable, [node.js](http://github.com/ry/node)
+This library is a simple, configurable, [node.js](http://nodejs.org)
 HTTP server compatible logging implementation that complies with the
 [W3C's Extended Log File Format][spec]. Major HTTP servers like IIS and Apache
 have options to follow this logging format, and that has the advantage of log
 viewing software that has already been written for this format.
 
+###Features###
+
+ * Log files produced adhere to the [W3C's Extended Log File Format specification][spec].
+ * Any number of loggers may be created for an individual `http.Server` instance.
+ * Highly configurable, from which fields to log, to where to save the files to, to which entries to log at all, etc.
+
 ---
 
-**node-elf-logger** is configurable. Specifically which `#Fields` should be
+`node-elf-logger` is configurable. Specifically which `#Fields` should be
 logged, whether to write to a stream or file, and the log folder and file
-naming (organization). First look at a minimal example:
+naming scheme (organization). First look at a minimal example:
 
     var http = require("http"),
         elf = require("elf-logger");
@@ -21,14 +27,14 @@ naming (organization). First look at a minimal example:
     httpServer.listen(80);
     elf.createLogger(httpServer);
 
-This will make the **node-elf-logger** log all requests to the `httpServer`
-instance using the `elf.defaultOptions` object. That is all that is needed to
-get it going!
+This will make a `node-elf-logger` instance. All requests to the
+`httpServer` instance will be logged using the `elf.defaultOptions` object.
+That is all that is needed to get it going!
 
 ---
 
 No doubt you are more interested in the configuration options of
-**node-elf-logger**. Supplying a second argument to the `elf.createLogger`
+`node-elf-logger`. Supplying a second argument to the `elf.createLogger`
 function uses the options specified instead of the `elf.defaultOptions`:
 
     elf.createLogger(httpServer, {
@@ -39,7 +45,7 @@ function uses the options specified instead of the `elf.defaultOptions`:
 
 ###Options Argument###
 
-**dir**: The root directory where **node-elf-logger** should store it's log
+**dir**: The root directory where `node-elf-logger` should store it's log
 files. This value will be prefixed onto the *template* value if present.
 
 **template**: Defines where each HTTP request should be logged it. This can be
@@ -50,7 +56,7 @@ For more fine-grained control, you may pass a `function` reference instead.
 This function will be called after every HTTP request has completed, and a
 log entry is about to be written. The function will be passed the `#Fields` as
 an object literal as an argument, and your function must return the path and
-name of log to write the entry to. You may also cancel a log entry by
+name of log to write the entry to. You may also cancel any log entry by
 returning a "falsey" value.
 
 **stream**: A ready `WritableStream` to log all HTTP requests to, instead of
