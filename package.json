@@ -1,0 +1,9 @@
+{
+  "name": "elf-logger",
+  "description": "A Node.js library for configurable HTTP logging following the W3C Extended Log File Format",
+  "version": "0.0.9",
+  "author": "Nathan Rajlich <nathan@tootallnate.net>",
+  "keywords": ["http", "log", "w3c", "elf", "extended"],
+  "main": "./lib/elf-logger",
+  "engines": { "node": ">= 0.1.100" }
+}
